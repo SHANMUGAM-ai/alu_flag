@@ -1,0 +1,17 @@
+// Code your testbench here
+// or browse Examples
+`timescale 1ns/1ps
+module tb_alu_flags;
+    reg [7:0] a = 8'h7F, b = 8'h01;
+    reg [2:0] op = 3'b000;
+    wire [7:0] result;
+    wire Z, C, N, V;
+
+    alu_flags uut (.a(a), .b(b), .op(op), .result(result), .Z(Z), .C(C), .N(N), .V(V));
+
+    initial begin
+        $dumpfile("alu.vcd"); $dumpvars(0, tb_alu_flags);
+        #50;
+        $finish;
+    end
+endmodule
