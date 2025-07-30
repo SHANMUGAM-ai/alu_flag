@@ -1,0 +1,21 @@
+// Code your design here
+module alu_flags (
+    input [7:0] a, b,
+    input [2:0] op,
+    output reg [7:0] result,
+    output reg Z, C, N, V
+);
+    always @(*) begin
+        case (op)
+            3'b000: {C, result} = a + b;
+            3'b001: {C, result} = a - b;
+            3'b010: result = a & b;
+            3'b011: result = a | b;
+            3'b100: result = a ^ b;
+            default: result = 0;
+        endcase
+        Z = (result == 0);
+        N = result[7];
+        V = (op == 3'b000 || op == 3'b001) && (a[7] == b[7]) && (result[7] != a[7]);
+    end
+endmodule
